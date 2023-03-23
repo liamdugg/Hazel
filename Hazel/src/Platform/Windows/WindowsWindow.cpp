@@ -29,35 +29,40 @@ namespace Hazel {
 		Shutdown();
 	}
 
-	void WindowsWindow::Init(const WindowProps& props)
-	{
+	void WindowsWindow::Init(const WindowProps& props) {
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
 		HZ_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		if (!s_GLFWInitialized)
-		{
+		if (!s_GLFWInitialized) {
+
 			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
 			HZ_CORE_ASSERT(success, "Could not intialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
 			s_GLFWInitialized = true;
 		}
-
+		
+		// Crea la ventana (default 1280x720 )
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
-		glfwSetWindowUserPointer(m_Window, &m_Data);
+		glfwSetWindowUserPointer(m_Window, &m_Data); // Seteo que el user ptr de la ventana sea un puntero a una struct WindowData
 		SetVSync(true);
 
 		// Set GLFW callbacks
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 		{
+			// Obtengo el user pointer (WindowData * m_Data) 
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			
+			// Actualizo los valores 
 			data.Width = width;
 			data.Height = height;
 
+			// Creo un evento del tipo que corresponda en este caso WindowResizeEvent
 			WindowResizeEvent event(width, height);
 			data.EventCallback(event);
 		});

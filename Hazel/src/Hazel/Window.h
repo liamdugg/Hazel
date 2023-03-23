@@ -1,14 +1,13 @@
 #pragma once
 
 #include "hzpch.h"
-
 #include "Hazel/Core.h"
 #include "Hazel/Events/Event.h"
 
 namespace Hazel {
 
-	struct WindowProps
-	{
+	struct WindowProps {
+
 		std::string Title;
 		unsigned int Width;
 		unsigned int Height;
@@ -22,9 +21,11 @@ namespace Hazel {
 	};
 
 	// Interface representing a desktop system based Window
-	class HAZEL_API Window
-	{
+	class HAZEL_API Window {
+
 	public:
+
+		// Funcion que devuelve void y toma como parametro una referencia a un Event (ver Event.h)
 		using EventCallbackFn = std::function<void(Event&)>;
 
 		virtual ~Window() {}
@@ -41,5 +42,4 @@ namespace Hazel {
 
 		static Window* Create(const WindowProps& props = WindowProps());
 	};
-
 }

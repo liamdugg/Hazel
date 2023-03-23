@@ -9,9 +9,10 @@
 
 namespace Hazel {
 
-	class HAZEL_API Application
-	{
+	class HAZEL_API Application {
+
 	public:
+		
 		Application();
 		virtual ~Application();
 
@@ -21,7 +22,9 @@ namespace Hazel {
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
+	
 	private:
+		
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;

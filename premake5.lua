@@ -51,6 +51,7 @@ project "Hazel"
 		staticruntime "On"
 		systemversion "latest"
 
+		-- Solo se van a definir si estoy en windows debido al filtro
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
