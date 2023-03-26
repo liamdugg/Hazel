@@ -5,6 +5,8 @@
 #include "Hazel/Events/MouseEvent.h"
 #include "Hazel/Events/KeyEvent.h"
 
+#include <glad/glad.h>
+
 namespace Hazel {
 	
 	static bool s_GLFWInitialized = false;
@@ -49,6 +51,8 @@ namespace Hazel {
 		// Crea la ventana (default 1280x720 )
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		HZ_CORE_ASSERT(status, "Failed to initialize glad");
 		glfwSetWindowUserPointer(m_Window, &m_Data); // Seteo que el user ptr de la ventana sea un puntero a una struct WindowData
 		SetVSync(true);
 
