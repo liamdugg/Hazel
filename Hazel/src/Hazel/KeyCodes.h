@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 // From glfw3.h
 #define HZ_KEY_SPACE              32
 #define HZ_KEY_APOSTROPHE         39  /* ' */
